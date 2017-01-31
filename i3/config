@@ -142,7 +142,7 @@ exec --no-startup-id dunst -frame_width 1 -cto 4 -nto 1.5 -lto 0.75
 exec --no-startup-id nm-applet
 exec --no-startup-id pnmixer
 exec --no-startup-id xfce4-power-manager
-exec --no-startup-id ~/.padwheel.sh
+exec --no-startup-id ~/.config/x61/padwheel.sh
 
 exec pulseaudio --start
 
