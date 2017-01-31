@@ -1,0 +1,5 @@
+- move i3lock@.service to /etc/systemd/system/i3lock@.service
+- run sudo systemctl enable i3lock@bordun.service
+
+
+
