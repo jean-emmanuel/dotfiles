@@ -27,9 +27,12 @@ new_window normal 1
 
 for_window [class=".*"]  title_format " %title"
 
+
 for_window [class="(?i)open stage control"]  floating enable
 for_window [class="(?i)appfinder"]  floating enable
 for_window [class="(?i)appfinder"]  border none
+
+for_window [instance="vmg"]  fullscreen enable
 
 bar {
   strip_workspace_numbers yes
@@ -186,6 +189,7 @@ bindsym XF86AudioRaiseVolume exec amixer set Master 4%+ unmute && exec notify-se
 bindsym XF86AudioLowerVolume exec amixer  set Master 4%- unmute && notify-send -t 50 -u low "Volume" "$(amixer sget Master | grep  -o -m1 "[0-9]*%")"
 bindsym XF86AudioMute exec amixer  set Master toggle && notify-send -t 50 -u low "Volume" "Mute $(amixer sget Master | grep  -o -m1 "\[on\]\|\[off\]")"
 
+
 # screenshot
 bindsym --release Print exec scrot $HOME/Images/screenshot-$(date +%Y-%m-%d-%H:%M:%S).png
 bindsym --release Shift+Print exec scrot -s $HOME/Images/screenshot-$(date +%Y-%m-%d-%H:%M:%S).png
@@ -269,4 +273,16 @@ mode "$mode_power" {
 }
 
 bindsym $mod+Shift+l mode "$mode_power"
+
+
+set $mode_zoom Zoom (click or press q / escape / enter to quit)
+mode "$mode_zoom" {
+	bindsym --whole-window button1 mode "default", exec "killall vmg"
+        bindsym Return mode "default", exec "killall vmg"
+        bindsym Escape mode "default", exec "killall vmg"
+        bindsym q mode "default", exec "killall vmg"
+	
+}
+
+bindsym $mod+Shift+z mode $mode_zoom, exec "vmg"
 

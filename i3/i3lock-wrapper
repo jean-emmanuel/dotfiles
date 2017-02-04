@@ -100,7 +100,8 @@ file1=$(mktemp --tmpdir i3lock-wrapper-XXXXXXXXXX.png)
 file2=$(mktemp --tmpdir i3lock-wrapper-XXXXXXXXXX.png)
 
 scrot -d0 "$file1"
-convert "$file1" -blur 5x5 +noise Gaussian -modulate 60,10 "$file2"
+#convert "$file1" -blur 5x5 +noise Gaussian -modulate 60,10 "$file2"
+convert "$file1" -scale 12.5% -scale 800% -size 1024x768 -modulate 60,10 "$file2"
 
 # drop the last "--" introduced by getopt
 i3lock --24 -e -l '#ffffff' -o '#4C7899' -w '#FF343A' -i "$file2" ${@:1:($#-1)}
