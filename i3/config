@@ -6,7 +6,8 @@ set $mod Mod1
 
 ####### STYLE #######
 
-set $font FontAwesome 8, DejaVu Sans 8
+set $font FontAwesome 8
+#, DejaVu Sans 8
 
 set $color-inactive #191f2a
 set $color-active #224263
@@ -29,6 +30,7 @@ for_window [class=".*"]  title_format " %title"
 
 
 for_window [class="(?i)open stage control"]  floating enable
+for_window [class="(?i)seq64"]  floating enable
 for_window [class="(?i)appfinder"]  floating enable
 for_window [class="(?i)appfinder"]  border none
 
@@ -70,8 +72,8 @@ set $ws2 2:
 bindsym $mod+F2 workspace $ws2
 bindsym $mod+Shift+F2 move container to workspace $ws2
 
-## 3: firefox
-set $ws3 3:
+## 3: chrome
+set $ws3 3:
 bindsym $mod+F3 workspace $ws3
 bindsym $mod+Shift+F3 move container to workspace $ws3
 
@@ -138,7 +140,7 @@ bindsym Mod4+Shift+Tab move scratchpad
 exec --no-startup-id i3-msg "workspace $ws4; exec thunar;workspace $ws1"
 exec --no-startup-id i3-msg "workspace $ws1; exec gnome-terminal"
 exec --no-startup-id i3-msg "workspace $ws2; exec icedove;workspace $ws1"
-exec --no-startup-id i3-msg "workspace $ws3; exec firefox;workspace $ws1"
+exec --no-startup-id i3-msg "workspace $ws3; exec chromium --disable-gpu-vsync;workspace $ws1"
 
 exec --no-startup-id xsetroot -solid "#000000"
 exec --no-startup-id dunst -frame_width 1 -cto 4 -nto 1.5 -lto 0.75
