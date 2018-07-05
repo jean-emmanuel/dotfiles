@@ -37,6 +37,8 @@ for_window [class="(?i)appfinder"]  border none
 for_window [instance="vmg"]  fullscreen enable
 
 bar {
+#  mode hide
+#  modifier $mod
   strip_workspace_numbers yes
   position top
   font pango: $font
@@ -137,10 +139,10 @@ bindsym Mod4+Shift+Tab move scratchpad
 
 ####### STARTUP #######
 
-exec --no-startup-id i3-msg "workspace $ws4; exec thunar;workspace $ws1"
+exec --no-startup-id i3-msg "workspace $ws4; exec thunar;"
 exec --no-startup-id i3-msg "workspace $ws1; exec gnome-terminal"
-exec --no-startup-id i3-msg "workspace $ws2; exec icedove;workspace $ws1"
-exec --no-startup-id i3-msg "workspace $ws3; exec chromium --disable-gpu-vsync;workspace $ws1"
+exec --no-startup-id i3-msg "workspace $ws2; exec thunderbird; layout tabbed"
+exec --no-startup-id i3-msg "workspace $ws3; exec chromium --disable-gpu-vsync;workspace"
 
 exec --no-startup-id xsetroot -solid "#000000"
 exec --no-startup-id dunst -frame_width 1 -cto 4 -nto 1.5 -lto 0.75
@@ -187,9 +189,9 @@ floating_modifier $mod
 
 
 # media keys
-bindsym XF86AudioRaiseVolume exec amixer set Master 4%+ unmute && exec notify-send -t 50 -u low "Volume" "$(amixer sget Master | grep  -o -m1 "[0-9]*%")"
-bindsym XF86AudioLowerVolume exec amixer  set Master 4%- unmute && notify-send -t 50 -u low "Volume" "$(amixer sget Master | grep  -o -m1 "[0-9]*%")"
-bindsym XF86AudioMute exec amixer  set Master toggle && notify-send -t 50 -u low "Volume" "Mute $(amixer sget Master | grep  -o -m1 "\[on\]\|\[off\]")"
+bindsym XF86AudioRaiseVolume exec amixer set Master 4%+ unmute && dunstify -r -1234 -u low "Volume" "$(amixer sget Master | grep  -o -m1 "[0-9]*%") $(amixer sget Master | grep  -o -m1 "\[off\]" | sed -En "s/\[off\]/(MUTE)/p")"
+bindsym XF86AudioLowerVolume exec amixer  set Master 4%- unmute && dunstify -r -1234 -u low "Volume" "$(amixer sget Master | grep  -o -m1 "[0-9]*%") $(amixer sget Master | grep  -o -m1 "\[off\]" | sed -En "s/\[off\]/(MUTE)/p")" 
+bindsym XF86AudioMute exec amixer  set Master toggle && dunstify -r -1234 -u low "Volume" "$(amixer sget Master | grep  -o -m1 "[0-9]*%") $(amixer sget Master | grep  -o -m1 "\[off\]" | sed -En "s/\[off\]/(MUTE)/p")"
 
 
 # screenshot
@@ -277,14 +279,14 @@ mode "$mode_power" {
 bindsym $mod+Shift+l mode "$mode_power"
 
 
-set $mode_zoom Zoom (click or press q / escape / enter to quit)
-mode "$mode_zoom" {
-	bindsym --whole-window button1 mode "default", exec "killall vmg"
-        bindsym Return mode "default", exec "killall vmg"
-        bindsym Escape mode "default", exec "killall vmg"
-        bindsym q mode "default", exec "killall vmg"
-	
-}
-
-bindsym $mod+Shift+z mode $mode_zoom, exec "vmg"
+#set $mode_zoom Zoom (click or press q / escape / enter to quit)
+#mode "$mode_zoom" {
+#	bindsym --whole-window button1 mode "default", exec "killall vmg"
+#        bindsym Return mode "default", exec "killall vmg"
+#        bindsym Escape mode "default", exec "killall vmg"
+#        bindsym q mode "default", exec "killall vmg"
+#	
+#}
+#
+#bindsym $mod+Shift+z mode $mode_zoom, exec "vmg"
 
